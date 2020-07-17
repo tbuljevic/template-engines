@@ -18,6 +18,10 @@ return [
         'hello_smarty' => [
             'handler' => ['ExampleApp\Controller\HelloWorldController', 'helloSmartyView'],
             'method' => 'GET'
+        ],
+        'hello_blade' => [
+            'handler' => ['ExampleApp\Controller\HelloWorldController', 'helloBladeView'],
+            'method' => 'GET'
         ]
     ]
 ];

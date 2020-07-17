@@ -1,5 +1,3 @@
 .idea
 vendor
-src/views/smarty_cache/*
-src/views/smarty_compile/*
-src/views/smarty_configs/*
+var

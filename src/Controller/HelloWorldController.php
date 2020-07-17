@@ -3,6 +3,7 @@
 namespace ExampleApp\Controller;
 
 use ExampleApp\Library\PHPTemplateRenderer;
+use Jenssegers\Blade\Blade;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -59,6 +60,21 @@ class HelloWorldController extends BaseController
             $this->response->getBody()->write($smarty->display('hello_world.tpl'));
         } catch (\SmartyException $e) {
             $this->response->getBody()->write($e->getMessage());
+        } catch (\Exception $e) {
+            $this->response->getBody()->write($e->getMessage());
+        }
+
+        return $this->response;
+    }
+
+    public function helloBladeView()
+    {
+        $blade = new Blade([$GLOBALS['viewDir'], $GLOBALS['layoutDir']], $GLOBALS['bladeCacheDir']);
+
+        try {
+            $this->response->getBody()->write(
+                $blade->render('hello_world', ['passed_values' => $this->passValues()])
+            );
         } catch (\Exception $e) {
             $this->response->getBody()->write($e->getMessage());
         }
