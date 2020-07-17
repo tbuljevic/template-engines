@@ -1,0 +1,44 @@
+{% extends 'main_layout.html.twig' %}
+
+{% block content_title %}
+    <h2>Hello world from my awesome site</h2>
+{% endblock %}
+
+{% block content_intro %}
+    <p>This is a very crude example of templating with Twig.</p>
+{% endblock %}
+
+{% block content_main %}
+    {% for key, value in passed_values %}
+        {% if key == 'title' %}
+            <header>
+                <h2>{{ value }}</h2>
+            </header>
+        {% elseif key == 'data' %}
+            <section>
+                <nav>
+                    <ul>
+                        {% for item in value %}
+                            <li><a href="#">{{ item.name }}</a>
+                        {% endfor %}
+                    </ul>
+                </nav>
+
+                {% for item in value %}
+                    {% if item.description is not empty %}
+                        <article>
+                            <h1>{{ item.name }}</h1>
+                            {{ item.description|raw }}
+                        </article>
+                    {% endif %}
+                {% endfor %}
+            </section>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+
+{% block content_footer %}
+    <footer>
+        <p>Footer</p>
+    </footer>
+{% endblock %}

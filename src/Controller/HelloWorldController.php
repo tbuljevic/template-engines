@@ -3,6 +3,11 @@
 namespace ExampleApp\Controller;
 
 use ExampleApp\Library\PHPTemplateRenderer;
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+use Twig\Loader\FilesystemLoader;
 
 class HelloWorldController extends BaseController
 {
@@ -10,7 +15,39 @@ class HelloWorldController extends BaseController
     {
         $templateRenderer = new PHPTemplateRenderer();
 
-        $templateRenderer->passedValues = [
+        $templateRenderer->passedValues = $this->passValues();
+
+        $this->response->withBody($templateRenderer->render('hello_world.html.php'));
+
+        return $this->response;
+    }
+
+    public function helloTwigView()
+    {
+        $loader = new FilesystemLoader([$GLOBALS['viewDir'], $GLOBALS['layoutDir']]);
+        $twig = new Environment($loader);
+
+        try {
+            $this->response->getBody()->write(
+                $twig->render('hello_world.html.twig',
+                [
+                    'passed_values' => $this->passValues()
+                ])
+            );
+        } catch (LoaderError $e) {
+            $this->response->getBody()->write($e->getMessage());
+        } catch (RuntimeError $e) {
+            $this->response->getBody()->write($e->getMessage());
+        } catch (SyntaxError $e) {
+            $this->response->getBody()->write($e->getMessage());
+        }
+
+        return $this->response;
+    }
+
+    private function passValues()
+    {
+        return [
             'title' => 'Cities',
             'data' => [
                 [
@@ -28,9 +65,5 @@ class HelloWorldController extends BaseController
                 ]
             ]
         ];
-
-        $this->response->withBody($templateRenderer->render('hello_world.html.php'));
-
-        return $this->response;
     }
 }
