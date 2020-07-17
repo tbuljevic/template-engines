@@ -14,6 +14,9 @@ $configFile = dirname(__DIR__) . '/app/config.php';
 
 $GLOBALS['viewDir'] = __DIR__ . '/../src/views/templates';
 $GLOBALS['layoutDir'] = __DIR__ . '/../src/views/layouts';
+$GLOBALS['smartyCacheDir'] = __DIR__ . '/../src/views/smarty_cache';
+$GLOBALS['smartyCompileDir'] = __DIR__ . '/../src/views/smarty_compile';
+$GLOBALS['smartyConfigsDir'] = __DIR__ . '/../src/views/smarty_configs';
 $GLOBALS['styleDir'] = __DIR__ . '/../src/views/styles';
 
 $containerBuilder = new ContainerBuilder();

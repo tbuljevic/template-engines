@@ -14,6 +14,10 @@ return [
         'hello_twig' => [
             'handler' => ['ExampleApp\Controller\HelloWorldController', 'helloTwigView'],
             'method' => 'GET'
+        ],
+        'hello_smarty' => [
+            'handler' => ['ExampleApp\Controller\HelloWorldController', 'helloSmartyView'],
+            'method' => 'GET'
         ]
     ]
 ];

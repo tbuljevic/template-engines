@@ -45,6 +45,27 @@ class HelloWorldController extends BaseController
         return $this->response;
     }
 
+    public function helloSmartyView()
+    {
+        $smarty = new \Smarty();
+        $smarty->setTemplateDir([$GLOBALS['viewDir'], $GLOBALS['layoutDir']]);
+        $smarty->setCacheDir($GLOBALS['smartyCacheDir']);
+        $smarty->setCompileDir($GLOBALS['smartyCompileDir']);
+        $smarty->setConfigDir($GLOBALS['smartyConfigsDir']);
+
+        $smarty->assign('passed_values', $this->passValues());
+
+        try {
+            $this->response->getBody()->write($smarty->display('hello_world.tpl'));
+        } catch (\SmartyException $e) {
+            $this->response->getBody()->write($e->getMessage());
+        } catch (\Exception $e) {
+            $this->response->getBody()->write($e->getMessage());
+        }
+
+        return $this->response;
+    }
+
     private function passValues()
     {
         return [
