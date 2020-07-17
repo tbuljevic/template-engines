@@ -28,7 +28,7 @@
                     {if !empty($item.description)}
                         <article>
                             <h1>{$item.name}</h1>
-                            <p>{$item.description}</p>
+                            {$item.description}
                         </article>
                     {/if}
                 {/foreach}
