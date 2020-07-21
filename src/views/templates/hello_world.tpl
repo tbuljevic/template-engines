@@ -1,5 +1,7 @@
 {extends 'main_layout.tpl'}
 
+{block name=page_title}Smarty view{/block}
+
 {block name=content_title}
 <h2>Hello world from my awesome site</h2>
 {/block}
@@ -19,7 +21,7 @@
                 <nav>
                     <ul>
                         {foreach from=$value item=$item}
-                            <li><a href="#">{$item.name}</a>
+                            <li><a href="{$item.url}">{$item.name}</a>
                         {/foreach}
                     </ul>
                 </nav>

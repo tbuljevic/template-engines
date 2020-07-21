@@ -1,5 +1,7 @@
 @extends('main_layout')
 
+@section('page_title') Blade view @endsection
+
 @section('content_title')
     <h2>Hello world from my awesome site</h2>
 @endsection
@@ -19,7 +21,7 @@
                 <nav>
                     <ul>
                         @foreach($value as $item)
-                            <li><a href="#">{{ $item['name'] }}</a>
+                            <li><a href="{{ $item['url'] }}">{{ $item['name'] }}</a>
                         @endforeach
                     </ul>
                 </nav>
