@@ -1,38 +1,44 @@
-<?php
-$content = [];
-$content['title'] = 'Hello world from my awesome site';
-$content['intro'] = '<p>This is a very crude example of templating with PHP.</p>';
-$content['main'] = '';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>PHP view</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-foreach ($this->passedValues as $passedKey => $passedValue) {
-    if ($passedKey == 'title') {
-        $content['main'] .= '<header><h2>' . $passedValue . '</h2></header>';
-    }
+    <link rel="stylesheet" type="text/css" href="/styles/style.css" />
+</head>
+<body>
 
-    if ($passedKey == 'data') {
-        // Set up nav elements
-        $content['main'] .= '<section><nav><ul>';
-        foreach ($passedValue as $item) {
-            $content['main'] .= '<li><a href="#">' . $item['name'] . '</a></li>';
-        }
+    <h2>Hello world from my awesome site</h2>
 
-        $content['main'] .= '</ul></nav>';
+    <p>This is a very crude example of templating with PHP.</p>
 
-        foreach ($passedValue as $item) {
-            if (!empty($item['description'])) {
-                $content['main'] .= '<article>';
+    <?php foreach ($this->passedValues as $passedKey => $passedValue) : ?>
+        <?php if ($passedKey == 'title') : ?>
+            <header><h2><?= $passedValue ?></h2></header>
+        <?php endif; ?>
 
-                $content['main'] .= '<h1>' . $item['name'] . '</h1>';
-                $content['main'] .= $item['description'];
+        <?php if ($passedKey == 'data') : ?>
+            <section>
+                <nav>
+                    <ul>
+                        <?php foreach ($passedValue as $item):?>
+                            <li><a href="<?= $item['url'] ?>"><?= $item['name'] ?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </nav>
 
-                $content['main'] .= '</article>';
-            }
-        }
+                <?php foreach ($passedValue as $item): ?>
+                    <?php if (!empty($item['description'])): ?>
+                        <article>
+                            <h1><?= $item['name'] ?></h1>
+                            <?= $item['description'] ?>
+                        </article>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </section>
+        <?php endif; ?>
+    <?php endforeach ?>
 
-        $content['main'] .= '</section>';
-    }
-}
-
-$content['footer'] = '<footer><p>Footer</p></footer>';
-
-include_once $GLOBALS['layoutDir'] . '/main_layout.html.php';
+    <footer><p>Footer</p></footer>
+</body>
