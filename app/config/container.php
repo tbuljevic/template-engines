@@ -4,6 +4,10 @@ return [
         'hello_world_class' => [
             'class' => 'ExampleApp\Controller\HelloWorldController',
             'arguments' => []
+        ],
+        'home_class' => [
+            'class' => 'ExampleApp\Controller\HomeController',
+            'arguments' => []
         ]
     ],
     'routes' => [
@@ -21,6 +25,10 @@ return [
         ],
         'hello_blade' => [
             'handler' => ['ExampleApp\Controller\HelloWorldController', 'helloBladeView'],
+            'method' => 'GET'
+        ],
+        'home' => [
+            'handler' => ['ExampleApp\Controller\HomeController', 'index'],
             'method' => 'GET'
         ]
     ]
