@@ -30,6 +30,18 @@ return [
         'home' => [
             'handler' => ['ExampleApp\Controller\HomeController', 'index'],
             'method' => 'GET'
+        ],
+        '' => [
+            'handler' => ['ExampleApp\Controller\HomeController', 'dashboard'],
+            'method' => 'GET'
+        ],
+        'api-create' => [
+            'handler' => ['ExampleApp\Controller\HomeController', 'create'],
+            'method' => 'GET'
+        ],
+        'api-show' => [
+            'handler' => ['ExampleApp\Controller\HomeController', 'show'],
+            'method' => 'GET'
         ]
     ]
 ];
