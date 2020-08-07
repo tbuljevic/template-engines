@@ -17,11 +17,13 @@ class BaseController
         ResponseInterface $response
     )
     {
-        $this->response = $response->withHeader('Content-Type', 'text/html');
+        $this->response = $response;
     }
 
     protected function render(string $template, array $data = [])
     {
+        $this->response->withHeader('Content-Type', 'text/html');
+
         $loader = new FilesystemLoader([$GLOBALS['viewDir'], $GLOBALS['layoutDir']]);
         $twig = new Environment($loader);
 
@@ -38,5 +40,27 @@ class BaseController
         }
 
         return $this->response;
+    }
+
+    protected function respondWithSuccess($data, $statusCode = 200)
+    {
+        return $this->response
+            ->setStatusCode($statusCode)
+            ->withHeader('Content-Type', 'text/html')
+            ->getBody()
+            ->write(json_encode([
+                'data' => $data
+            ]));
+    }
+
+    protected function respondWithError(array $errors = [], $statusCode = 400)
+    {
+        return $this->response
+            ->setStatusCode($statusCode)
+            ->withHeader('Content-Type', 'text/html')
+            ->getBody()
+            ->write(json_encode([
+                'errors' => $errors
+            ]));
     }
 }

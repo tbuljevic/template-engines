@@ -4,16 +4,18 @@
     <title>{% block page_title %}{% endblock %}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <link rel="stylesheet" type="text/css" href="/styles/style.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+    {% block headScripts %}{% endblock %}
 </head>
 <body>
 
-    {% block content_title %}{% endblock %}
+    {% block header %}{% endblock %}
 
-    {% block content_intro %}{% endblock %}
+    {% block content %}{% endblock %}
 
-    {% block content_main %}{% endblock %}
+    {% block footer %}{% endblock %}
 
-    {% block content_footer %}{% endblock %}
+    <script src="/assets/js/app.js"></script>
+    {% block footerScripts %}{% endblock %}
 </body>

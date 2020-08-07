@@ -18,4 +18,20 @@ class HomeController extends BaseController
 
         return $this->render('home.html.twig', json_decode($json, true));
     }
+
+    public function dashboard()
+    {
+        return $this->render('dashboard.html.twig', []);
+    }
+
+
+    public function create()
+    {
+        return [];
+    }
+
+    public function show()
+    {
+        return $this->respondWithSuccess([]);
+    }
 }
